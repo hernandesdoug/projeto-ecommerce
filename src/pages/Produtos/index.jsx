@@ -31,7 +31,7 @@ function Produtos() {
                             <h4>{product.title}</h4>
                             <ImgProd src={product.image} alt={product.title} />
                             <Preco>{product.price} USD</Preco>
-                            <button onClick={() => addToCart(product)}>Adicionar ao carrinho</button>
+                            <BtnCarrinho onClick={() => addProd(product)}>Adicionar ao carrinho</BtnCarrinho>
                         </CardProd>
                     ))}
                 </Lista>
@@ -64,7 +64,7 @@ const Lista = styled.div`
 `;
 
 const ImgProd = styled.img`
-  width: 250px;
+  width: 100px;
   height: auto;
 `;
 
@@ -80,5 +80,13 @@ const CardProd = styled.div`
   box-shadow: 0 2px 4px rgba(0,0,0,0.4);
 `;
 const BtnCarrinho = styled.button`
+ padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background: #ffa500;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 5px;
 `;
 export default Produtos;
