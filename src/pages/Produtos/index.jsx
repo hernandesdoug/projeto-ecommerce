@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
 import listaProdutos from "../../services/listaProdutos";
 import styled from 'styled-components';
+import useCartStore from '../../store/useCartStore';
 
 function Produtos() {
     const [produtos, setProdutos] = useState([]);
+
+    const addItem = useCartStore((state) => state.addItem);
 
     async function carregaProdutos() {
         try {
@@ -31,7 +34,7 @@ function Produtos() {
                             <h5>{product.title}</h5>
                             <ImgProd src={product.image} alt={product.title} />
                             <Preco>{product.price} USD</Preco>
-                            <BtnCarrinho onClick={() => addProd(product)}>Adicionar ao carrinho</BtnCarrinho>
+                            <BtnCarrinho onClick={() => addItem(product)}>Adicionar ao carrinho</BtnCarrinho>
                         </CardProd>
                     ))}
                 </Lista>
