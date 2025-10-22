@@ -2,11 +2,13 @@ import { useState, useEffect } from 'react';
 import listaProdutos from "../../services/listaProdutos";
 import styled from 'styled-components';
 import useCartStore from '../../store/useCartStore';
+import { Link } from 'react-router-dom';
 
 function Produtos() {
     const [produtos, setProdutos] = useState([]);
 
     const addItem = useCartStore((state) => state.addItem);
+    const count = items.reduce((sum, i) => sum + i.quantity, 0);
 
     async function carregaProdutos() {
         try {
@@ -27,7 +29,9 @@ function Produtos() {
     return (
         <>
             <Container>
-                <Title>Produtos</Title>
+                <Title>Produtos
+                    <Link to="/carrinho">Carrinho</Link>
+                </Title>
                 <Lista>
                     {produtos.map(product => (
                         <CardProd key={product.id}>

@@ -10,7 +10,7 @@ function AppRoutes() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Produtos />} />
-          <Route path="/carrinho/:id" element={<Carrinho />} />
+          <Route path="/carrinho/" element={<Carrinho />} />
           <Route path="/pedidos/:id" element={<Pedidos />} />
           <Route path="/usuarios/" element={<Usuarios />} />
         </Routes>

@@ -1,10 +1,9 @@
-import React from 'react';
+
 import useCartStore from '../../store/useCartStore';
 
 function Carrinho() {
   
-    const {items, removeItem, clearCart, total} = useCartStore();
-
+    const {items, removeItem, clearCart} = useCartStore();
     return (
     <div>
         <h1>Carrinho</h1>
@@ -15,12 +14,12 @@ function Carrinho() {
         <ul>
             {items.map((item) => (
               <li key={item.id}>
-                {item.title} - R$ {item.price} x {item.quantity}
+                {item.title} - USD {item.price} 
                 <button onClick={() => removeItem(item.id)}>Remover</button>
               </li>
             ))}
           </ul>
-          <p>Total: R$ {total()}</p>
+          <p>Total: USD</p>
           <button onClick={clearCart}>Finalizar compra</button>
         </>
         )}
