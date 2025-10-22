@@ -28,7 +28,7 @@ function Produtos() {
                 <Lista>
                     {produtos.map(product => (
                         <CardProd key={product.id}>
-                            <h4>{product.title}</h4>
+                            <h5>{product.title}</h5>
                             <ImgProd src={product.image} alt={product.title} />
                             <Preco>{product.price} USD</Preco>
                             <BtnCarrinho onClick={() => addProd(product)}>Adicionar ao carrinho</BtnCarrinho>
@@ -38,7 +38,6 @@ function Produtos() {
             </Container>
         </>
     )
-
 }
 
 const Container = styled.div`
@@ -65,20 +64,26 @@ const Lista = styled.div`
 
 const ImgProd = styled.img`
   width: 100px;
-  height: auto;
+  height: 100px;
+  object-fit: contain;
 `;
 
 const Preco = styled.p`
-    margin: 8px 0;
+    margin-top: 5px;
 `;
 
 const CardProd = styled.div`
   background: #fff;
   border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   padding: 10px;
   text-align: center;
   box-shadow: 0 2px 4px rgba(0,0,0,0.4);
 `;
+
 const BtnCarrinho = styled.button`
  padding: 10px;
   border: none;
