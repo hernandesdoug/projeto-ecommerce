@@ -8,7 +8,6 @@ function Produtos() {
     const [produtos, setProdutos] = useState([]);
 
     const addItem = useCartStore((state) => state.addItem);
-    const count = items.reduce((sum, i) => sum + i.quantity, 0);
 
     async function carregaProdutos() {
         try {
