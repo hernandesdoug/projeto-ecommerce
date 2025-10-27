@@ -5,6 +5,8 @@ function Carrinho() {
   
     const {items, removeItem, addItem} = useCartStore();
 
+    const total = items.reduce((acc, item) => acc + item.price, 0);
+
     const navigate = useNavigate();
     const voltarLista = () => {
         navigate('/'); 
@@ -31,9 +33,13 @@ function Carrinho() {
               </li>
             ))}
           </ul>
-          <p>Total: USD</p>
-          <button onClick={fecharPedido}>Fechar Pedido</button>
-          <button onClick={voltarLista}>Voltar</button>
+          <div>
+            <p>Total: USD {total.toFixed(2)}</p>
+          </div>
+          <div>
+            <button onClick={fecharPedido}>Fechar Pedido</button>
+            <button onClick={voltarLista}>Voltar</button>
+          </div>
         </>
         )}
     </div>    
