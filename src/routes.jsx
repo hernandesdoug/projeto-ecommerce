@@ -4,6 +4,7 @@ import Carrinho from "./pages/Carrinho";
 import Pedidos from "./pages/Pedidos";
 import Produtos from "./pages/Produtos";
 import Usuarios from "./pages/Usuarios";
+import Pagamento from "./pages/Pagamento";
 
 function AppRoutes() {
     return (
@@ -13,6 +14,7 @@ function AppRoutes() {
           <Route path="/carrinho/" element={<Carrinho />} />
           <Route path="/pedidos/" element={<Pedidos />} />
           <Route path="/pedidos/:id" element={<Pedidos />} />
+          <Route path="/pagamento/" element={<Pagamento />} />
           <Route path="/usuarios/" element={<Usuarios />} />
         </Routes>
       </BrowserRouter>

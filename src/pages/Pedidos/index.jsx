@@ -4,13 +4,17 @@ import styled from 'styled-components'
 
 function Pedidos() {
 
-    const {items, clearCart} = useCartStore();
+    const {items} = useCartStore();
 
     const total = items.reduce((acc, item) => acc + item.price, 0);
     
       const navigate = useNavigate();
       const voltarCarrinho = () => {
           navigate('/carrinho/');
+      }
+
+      const fecharPagto = () => {
+        navigate('/pagamento/');
       }
     return (
         <Container>
@@ -30,7 +34,7 @@ function Pedidos() {
             <p>Total: USD {total.toFixed(2)}</p>
           </TotalPedido> 
           <BotoesPedido>
-            <BtnPagto onClick={clearCart}>Ir para pagamento</BtnPagto>
+            <BtnPagto onClick={fecharPagto}>Ir para pagamento</BtnPagto>
             <BtnVoltar onClick={voltarCarrinho}>Volte para o carrinho</BtnVoltar>
           </BotoesPedido>
           
