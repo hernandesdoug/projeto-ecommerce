@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 function Carrinho() {
 
-  const { items, removeItem, addItem } = useCartStore();
+  const { items, removeItem} = useCartStore();
 
   const total = items.reduce((acc, item) => acc + item.price, 0);
 
