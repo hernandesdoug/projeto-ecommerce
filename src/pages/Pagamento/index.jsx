@@ -1,21 +1,31 @@
 import useCartStore from '../../store/useCartStore';
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components'
+import styled from 'styled-components';
+import { loadStripe } from "@stripe/stripe-js";
 
 function Pagamento() {
     const { items } = useCartStore();
-
+ 
     const total = items.reduce((acc, item) => acc + item.price, 0);
-    
+
     const navigate = useNavigate();
     const voltarPedido = () => {
         navigate('/pedidos/');
     }
 
-    async function Pagar () {
-
-
-    }
+    const Pagar = async () => {
+       
+        const response = await fetch('http://localhost:3333/payment', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(items),
+        });
+        const session = await response.json();
+        const url = session.url;
+        window.location.href = url;
+    };
     return (
         <Container>
             <Title>Finalize seu pagamento</Title>
@@ -71,7 +81,7 @@ const BtnPagar = styled(BtnVoltar)`
   &:hover {
     background: #bbb;
   }
-`; 
+`;
 
 const BotoesPagto = styled.div`
   display: flex;
