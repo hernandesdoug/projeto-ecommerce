@@ -18,7 +18,7 @@ function AppRoutes() {
           <Route path="/pedidos/:id" element={<Pedidos />} />
           <Route path="/pagamento/" element={<Pagamento />} />
           <Route path="/usuarios/" element={<Usuarios />} />
-          <Route path="/sucess/" element={<Sucesso />} />
+          <Route path="/success/" element={<Sucesso />} />
           <Route path="/cancel/" element={<Cancelar />} />
         </Routes>
       </BrowserRouter>
