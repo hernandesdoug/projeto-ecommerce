@@ -10,7 +10,7 @@ function Cancelar () {
     return (
         <>
         <Container>
-            <Title>Pagamento Cancelado</Title>
+            <Title>😕 Pagamento Cancelado</Title>
             <p>Tente novamente uma nova compra</p>
         </Container>
         <BtnVolta>
