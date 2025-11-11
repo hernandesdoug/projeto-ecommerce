@@ -5,6 +5,8 @@ import Pedidos from "./pages/Pedidos";
 import Produtos from "./pages/Produtos";
 import Usuarios from "./pages/Usuarios";
 import Pagamento from "./pages/Pagamento";
+import Cancelar from "./pages/Cancelar";
+import Sucesso from "./pages/Sucesso";
 
 function AppRoutes() {
     return (
@@ -16,6 +18,8 @@ function AppRoutes() {
           <Route path="/pedidos/:id" element={<Pedidos />} />
           <Route path="/pagamento/" element={<Pagamento />} />
           <Route path="/usuarios/" element={<Usuarios />} />
+          <Route path="/sucess/" element={<Sucesso />} />
+          <Route path="/cancel/" element={<Cancelar />} />
         </Routes>
       </BrowserRouter>
     );
