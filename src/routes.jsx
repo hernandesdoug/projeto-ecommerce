@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Carrinho from "./pages/Carrinho";
 import Pedidos from "./pages/Pedidos";
 import Produtos from "./pages/Produtos";
-import Usuarios from "./pages/Usuarios";
+import Login from "./pages/Login";
 import Pagamento from "./pages/Pagamento";
 import Cancelar from "./pages/Cancelar";
 import Sucesso from "./pages/Sucesso";
@@ -17,7 +17,7 @@ function AppRoutes() {
           <Route path="/pedidos/" element={<Pedidos />} />
           <Route path="/pedidos/:id" element={<Pedidos />} />
           <Route path="/pagamento/" element={<Pagamento />} />
-          <Route path="/usuarios/" element={<Usuarios />} />
+          <Route path="/login/" element={<Login />} />
           <Route path="/success/" element={<Sucesso />} />
           <Route path="/cancel/" element={<Cancelar />} />
         </Routes>
