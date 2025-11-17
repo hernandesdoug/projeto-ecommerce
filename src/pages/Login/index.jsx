@@ -7,11 +7,16 @@ function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
+ 
     async function validateLogin() {
         try {
             const response = await api.post("users/login", { email: email, password: password });
-            console.log(response.data);
-            if (response.status === 200) {
+            const data = response.data; 
+            const token = data.token;
+            const idUser = data.id;
+            if (response.status === 200 && token) {
+                localStorage.setItem("ecommerce-token", token);
+                localStorage.setItem("ecommerce-iduser", idUser);
                 navigate('/pedidos/');
             } else {
                 console.log("Login Failed!", response.status);

@@ -1,45 +1,39 @@
 import useCartStore from '../../store/useCartStore';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { loadStripe } from "@stripe/stripe-js";
+import api from "../../services/api";
 
 function Pagamento() {
-    const { items } = useCartStore();
- 
-    const total = items.reduce((acc, item) => acc + item.price, 0);
+  const { items } = useCartStore();
 
-    const navigate = useNavigate();
-    const voltarPedido = () => {
-        navigate('/pedidos/');
-    }
+  const total = items.reduce((acc, item) => acc + item.price, 0);
 
-    const Pagar = async () => {
-       
-        const response = await fetch('http://localhost:3333/payment', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(items),
-        });
-        const session = await response.json();
-        const url = session.url;
-        window.location.href = url;
-    };
-    return (
-        <Container>
-            <Title>Finalize seu pagamento</Title>
-            <>
-                <TotalPagto>
-                    <p>Total a pagar: {total.toFixed(2)}</p>
-                </TotalPagto>
-                <BotoesPagto>
-                    <BtnPagar onClick={Pagar}>Pagar</BtnPagar>
-                    <BtnVoltar onClick={voltarPedido}>Voltar</BtnVoltar>
-                </BotoesPagto>
-            </>
-        </Container>
-    )
+  const navigate = useNavigate();
+  const voltarPedido = () => {
+    navigate('/pedidos/');
+  }
+
+  const Pagar = async () => {
+   
+    const response = await api.post('payment', items);
+    const session = response.data;
+    const url = session.url;
+    window.location.href = url;
+  };
+  return (
+    <Container>
+      <Title>Finalize seu pagamento</Title>
+      <>
+        <TotalPagto>
+          <p>Total a pagar: {total.toFixed(2)}</p>
+        </TotalPagto>
+        <BotoesPagto>
+          <BtnPagar onClick={Pagar}>Pagar</BtnPagar>
+          <BtnVoltar onClick={voltarPedido}>Voltar</BtnVoltar>
+        </BotoesPagto>
+      </>
+    </Container>
+  )
 
 }
 

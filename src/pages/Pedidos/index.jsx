@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components'
 
 function Pedidos() {
-
+    const idUser = localStorage.getItem("ecommerce-iduser");
     const {items} = useCartStore();
 
     const total = items.reduce((acc, item) => acc + item.price, 0);
@@ -12,9 +12,16 @@ function Pedidos() {
       const voltarCarrinho = () => {
           navigate('/carrinho/');
       }
-
-      const fecharPagto = () => {
-        navigate('/pagamento/');
+      const statusOrder = "pendente";
+      const fecharPagto =  async () => {
+        const orderId = {
+          idUser,
+          total,
+          statusOrder,
+        }
+        const response = await api.post('orders', orderId);
+        console.log(response);
+        // navigate('/pagamento/');
       }
     return (
         <Container>

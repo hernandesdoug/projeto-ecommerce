@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 function Carrinho() {
 
   const { items, removeItem} = useCartStore();
-  const token = "";
+  const token = localStorage.getItem("ecommerce-token");
   const total = items.reduce((acc, item) => acc + item.price, 0);
 
   const navigate = useNavigate();
