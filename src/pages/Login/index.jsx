@@ -6,14 +6,13 @@ import api from "../../services/api";
 function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
+    const navigate = useNavigate();
     async function validateLogin() {
         try {
             const response = await api.post("users/login", { email: email, password: password });
             console.log(response.data);
             if (response.status === 200) {
-                 const navigate = useNavigate();
-                navigate('/pedido/');
+                navigate('/pedidos/');
             } else {
                 console.log("Login Failed!", response.status);
             }
