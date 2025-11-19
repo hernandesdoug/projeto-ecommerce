@@ -6,7 +6,7 @@ import api from "../../services/api";
 function Pagamento() {
   const { items } = useCartStore();
 
-  const total = items.reduce((acc, item) => acc + item.price, 0);
+  const totalAmount = items.reduce((acc, item) => acc + item.price, 0);
 
   const navigate = useNavigate();
   const voltarPedido = () => {
@@ -25,7 +25,7 @@ function Pagamento() {
       <Title>Finalize seu pagamento</Title>
       <>
         <TotalPagto>
-          <p>Total a pagar: {total.toFixed(2)}</p>
+          <p>Total a pagar: {totalAmount.toFixed(2)}</p>
         </TotalPagto>
         <BotoesPagto>
           <BtnPagar onClick={Pagar}>Pagar</BtnPagar>

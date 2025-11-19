@@ -15,12 +15,20 @@ function Pedidos() {
   }
   const status = "pendente";
   const orderId = {
-      idUser,
-      totalAmount,
-      status,
+    idUser,
+    totalAmount,
+    status,
   }
-  const fecharPagto = async () => { 
+  const fecharPagto = async () => {
     const response = await api.post('orders', orderId);
+    const data = response.data; 
+    const idOrder = data.id;
+    console.log(data.id);
+    if (response.status === 201) {
+      localStorage.setItem("ecommerce-idorder", idOrder);
+    } else {
+      console.log("Retrieve id failed!", response.status);
+    }
     navigate('/pagamento/');
   }
   return (

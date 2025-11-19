@@ -1,26 +1,41 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import api from "../../services/api";
+import useCartStore from '../../store/useCartStore';
 
-function Sucesso () {
-   
-    const navigate = useNavigate();
-    const voltarLoja = () => {
-        navigate('/');
-    }
+function Sucesso() {
 
+  const idUser = localStorage.getItem("ecommerce-iduser");
+  const idOrder = localStorage.getItem("ecommerce-idorder");
+  const { items } = useCartStore();
+  const totalAmount = items.reduce((acc, item) => acc + item.price, 0);
+  const status = "pago";
 
+  const orderId = {
+    idUser,
+    totalAmount,
+    status,
+  }
+  const AtualizarStatus = async () => {
+    const response = await api.put(`orders/${idOrder}`, orderId);
+    console.log(response);
+  } 
+  const navigate = useNavigate();
+  const voltarLoja = () => {
+    navigate('/');
+  }
 
-    return (
-        <>
-        <Container>
-            <Title>🎉 Pagamento Realizado com Sucesso!</Title>
-            <p>Obrigado pela compra!</p>
-        </Container>
-        <BtnVolta>
-            <BtnVoltar onClick={voltarLoja}>Volte a loja</BtnVoltar>
-        </BtnVolta>
-        </>
-    )
+  return (
+    <>
+      <Container>
+        <Title>🎉 Pagamento Realizado com Sucesso!</Title>
+        <p>Obrigado pela compra!</p>
+      </Container>
+      <BtnVolta>
+        <BtnVoltar onClick={voltarLoja}>Volte a loja</BtnVoltar>
+      </BtnVolta>
+    </>
+  )
 }
 
 const Container = styled.div`
