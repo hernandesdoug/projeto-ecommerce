@@ -7,19 +7,20 @@ import Login from "./pages/Login";
 import Pagamento from "./pages/Pagamento";
 import Cancelar from "./pages/Cancelar";
 import Sucesso from "./pages/Sucesso";
+import Usuario from "./pages/Usuario";
 
 function AppRoutes() {
     return (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Produtos />} />
-          <Route path="/carrinho/" element={<Carrinho />} />
-          <Route path="/pedidos/" element={<Pedidos />} />
-          <Route path="/pedidos/:id" element={<Pedidos />} />
-          <Route path="/pagamento/" element={<Pagamento />} />
-          <Route path="/login/" element={<Login />} />
-          <Route path="/success/" element={<Sucesso />} />
-          <Route path="/cancel/" element={<Cancelar />} />
+          <Route path="/carrinho" element={<Carrinho />} />
+          <Route path="/pedidos" element={<Pedidos />} />
+          <Route path="/usuario" element={<Usuario />} />
+          <Route path="/pagamento" element={<Pagamento />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/success" element={<Sucesso />} />
+          <Route path="/cancel" element={<Cancelar />} />
         </Routes>
       </BrowserRouter>
     );

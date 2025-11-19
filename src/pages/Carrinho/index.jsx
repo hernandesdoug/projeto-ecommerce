@@ -15,7 +15,7 @@ function Carrinho() {
 
   function fecharPedido() {
     if (!token) {
-      navigate('/login/')
+      navigate('/login')
     } else {
       navigate('/pedidos/');
     }  

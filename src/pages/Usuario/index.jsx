@@ -1,42 +1,14 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import api from "../../services/api";
-import useCartStore from '../../store/useCartStore';
 import { useEffect } from 'react';
 
-function Sucesso() {
-
-  const idUser = localStorage.getItem("ecommerce-iduser");
-  const idOrder = localStorage.getItem("ecommerce-idorder");
-  const { items } = useCartStore();
-  const totalAmount = items.reduce((acc, item) => acc + item.price, 0);
-  const status = "pago";
-
-  const orderId = {
-    idUser,
-    totalAmount,
-    status,
-  }
-  
-  const AtualizarStatus = async () => {
-    const response = await api.put(`orders/${idOrder}`, orderId);
-    console.log(response);
-  } 
-
-   useEffect(() => {
-        AtualizarStatus();
-    }, [])
-
-  const navigate = useNavigate();
-  const voltarLoja = () => {
-    navigate('/');
-  }
-
-  return (
+function Usuario () {
+    return (
     <>
       <Container>
-        <Title>🎉 Pagamento Realizado com Sucesso!</Title>
-        <p>Obrigado pela compra!</p>
+        <Title>Bem Vindo, Usuario</Title>
+        <p>Pedidos</p>
       </Container>
       <BtnVolta>
         <BtnVoltar onClick={voltarLoja}>Volte a loja</BtnVoltar>
@@ -82,4 +54,4 @@ const BtnVolta = styled.div`
   gap: 10px;
   flex-wrap: wrap;
 `;
-export default Sucesso;
+export default Usuario;

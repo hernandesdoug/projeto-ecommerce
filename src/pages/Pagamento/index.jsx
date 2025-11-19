@@ -19,6 +19,7 @@ function Pagamento() {
     const session = response.data;
     const url = session.url;
     window.location.href = url;
+    
   };
   return (
     <Container>
