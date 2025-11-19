@@ -1,53 +1,53 @@
 import useCartStore from '../../store/useCartStore';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components'
+import api from "../../services/api";
 
 function Pedidos() {
-    const idUser = localStorage.getItem("ecommerce-iduser");
-    const {items} = useCartStore();
+  const idUser = localStorage.getItem("ecommerce-iduser");
+  const { items } = useCartStore();
 
-    const total = items.reduce((acc, item) => acc + item.price, 0);
-    
-      const navigate = useNavigate();
-      const voltarCarrinho = () => {
-          navigate('/carrinho/');
-      }
-      const statusOrder = "pendente";
-      const fecharPagto =  async () => {
-        const orderId = {
-          idUser,
-          total,
-          statusOrder,
-        }
-        const response = await api.post('orders', orderId);
-        console.log(response);
-        // navigate('/pagamento/');
-      }
-    return (
-        <Container>
-        <Title>Pedido</Title>
-        <> 
+  const totalAmount = items.reduce((acc, item) => acc + item.price, 0);
+
+  const navigate = useNavigate();
+  const voltarCarrinho = () => {
+    navigate('/carrinho/');
+  }
+  const status = "pendente";
+  const orderId = {
+      idUser,
+      totalAmount,
+      status,
+  }
+  const fecharPagto = async () => { 
+    const response = await api.post('orders', orderId);
+    navigate('/pagamento/');
+  }
+  return (
+    <Container>
+      <Title>Pedido</Title>
+      <>
         <Lista>
-            {items.map((item, index) => (
-              <Item key={index}>
-                <ItemInfo>
-                  <ItemTitle>{item.title}</ItemTitle>
-                  <ItemPreco>USD {item.price}</ItemPreco>
-                </ItemInfo>
-              </Item>
-            ))}
-          </Lista>
-          <TotalPedido>
-            <p>Total: USD {total.toFixed(2)}</p>
-          </TotalPedido> 
-          <BotoesPedido>
-            <BtnPagto onClick={fecharPagto}>Ir para pagamento</BtnPagto>
-            <BtnVoltar onClick={voltarCarrinho}>Volte para o carrinho</BtnVoltar>
-          </BotoesPedido>
-          
-        </>
-    </Container>    
-    );
+          {items.map((item, index) => (
+            <Item key={index}>
+              <ItemInfo>
+                <ItemTitle>{item.title}</ItemTitle>
+                <ItemPreco>USD {item.price}</ItemPreco>
+              </ItemInfo>
+            </Item>
+          ))}
+        </Lista>
+        <TotalPedido>
+          <p>Total: USD {totalAmount.toFixed(2)}</p>
+        </TotalPedido>
+        <BotoesPedido>
+          <BtnPagto onClick={fecharPagto}>Ir para pagamento</BtnPagto>
+          <BtnVoltar onClick={voltarCarrinho}>Volte para o carrinho</BtnVoltar>
+        </BotoesPedido>
+
+      </>
+    </Container>
+  );
 
 }
 
@@ -121,7 +121,7 @@ const BtnPagto = styled(BtnVoltar)`
   &:hover {
     background: #bbb;
   }
-`; 
+`;
 
 const BotoesPedido = styled.div`
   display: flex;
