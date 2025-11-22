@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 const api = axios.create({
   baseURL: "http://localhost:3333/",
@@ -9,6 +10,9 @@ api.interceptors.request.use( (config) => {
   config.headers["Authorization"] = `Bearer ${token}`;
   return config;
 })
+
+
+
 api.interceptors.response.use(
   (response) => response,
   (error) => {
@@ -17,11 +21,11 @@ api.interceptors.response.use(
 
       if (status === 401 || status === 403) {
         localStorage.removeItem("ecommerce-token");
-
-        window.location.href = "/login";
-      }
+        const navigate = useNavigate();
+        // window.location.href = "/login";
+        navigate('/login');
     }
-
+  }
     return Promise.reject(error);
   }
 );
