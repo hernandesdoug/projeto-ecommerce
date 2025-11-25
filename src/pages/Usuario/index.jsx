@@ -8,7 +8,6 @@ function Usuario() {
   const idUser = localStorage.getItem("ecommerce-iduser");
 
   async function  mostrarPedidos() {
-    console.log(idUser);
     const response = await api.get("orders", { params: { idUser } });
     setPedidos(response.data);
   }
@@ -31,8 +30,8 @@ function Usuario() {
         {pedidos.map((pedido) => (
           <Pedido key={pedido.id}>
             <PedidoInfo>
-              <PedidoStatus>{pedido.status}</PedidoStatus>
-              <PedidoTotal>{pedido.totalAmount}</PedidoTotal>
+              <PedidoStatus>Status: {pedido.status}</PedidoStatus>
+              <PedidoTotal>Total: {pedido.totalAmount}</PedidoTotal>
             </PedidoInfo>
           </Pedido>
         ))}
