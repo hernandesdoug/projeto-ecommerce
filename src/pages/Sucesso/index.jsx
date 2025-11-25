@@ -2,15 +2,14 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import api from "../../services/api";
 import useCartStore from '../../store/useCartStore';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 function Sucesso() {
-
+ const [status] = useState("pago");
   const idUser = localStorage.getItem("ecommerce-iduser");
   const idOrder = localStorage.getItem("ecommerce-idorder");
   const { items } = useCartStore();
   const totalAmount = items.reduce((acc, item) => acc + item.price, 0);
-  const status = "pago";
 
   const orderId = {
     idUser,
@@ -32,6 +31,9 @@ function Sucesso() {
     navigate('/');
   }
 
+  const verPedido = async () => {
+    navigate('/usuario');
+  }
   return (
     <>
       <Container>
@@ -40,6 +42,7 @@ function Sucesso() {
       </Container>
       <BtnVolta>
         <BtnVoltar onClick={voltarLoja}>Volte a loja</BtnVoltar>
+        <BtnPedidos onClick={verPedido}>Pedidos</BtnPedidos>
       </BtnVolta>
     </>
   )
@@ -73,6 +76,15 @@ const BtnVoltar = styled.button`
   &:hover {
     background: #ffa733;
     transform: scale(1.05);
+  }
+`;
+
+const BtnPedidos = styled(BtnVoltar)`
+  background: #ccc;
+  color: #333;
+
+  &:hover {
+    background: #bbb;
   }
 `;
 

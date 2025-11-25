@@ -2,10 +2,12 @@ import useCartStore from '../../store/useCartStore';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components'
 import api from "../../services/api";
+import { useState } from 'react';
 
 function Pedidos() {
   const idUser = localStorage.getItem("ecommerce-iduser");
   const { items } = useCartStore();
+  const [status] = useState("pendente");
 
   const totalAmount = items.reduce((acc, item) => acc + item.price, 0);
 
@@ -13,7 +15,7 @@ function Pedidos() {
   const voltarCarrinho = () => {
     navigate('/carrinho/');
   }
-  const status = "pendente";
+
   const orderId = {
     idUser,
     totalAmount,

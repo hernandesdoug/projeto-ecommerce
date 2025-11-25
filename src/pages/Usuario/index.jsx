@@ -1,15 +1,42 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import api from "../../services/api";
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-function Usuario () {
-    return (
+function Usuario() {
+  const [pedidos, setPedidos] = useState([]);
+  const idUser = localStorage.getItem("ecommerce-iduser");
+
+  async function  mostrarPedidos() {
+    console.log(idUser);
+    const response = await api.get("orders", { params: { idUser } });
+    setPedidos(response.data);
+  }
+
+  useEffect(() => {
+    mostrarPedidos();
+  }, [])
+
+  const navigate = useNavigate();
+  const voltarLoja = () => {
+    navigate('/');
+  }
+  return (
     <>
       <Container>
-        <Title>Bem Vindo, Usuario</Title>
-        <p>Pedidos</p>
+        <Title>Bem Vindo</Title>
+        <p>Seus Pedidos</p>
       </Container>
+      <Lista>
+        {pedidos.map((pedido) => (
+          <Pedido key={pedido.id}>
+            <PedidoInfo>
+              <PedidoStatus>{pedido.status}</PedidoStatus>
+              <PedidoTotal>{pedido.totalAmount}</PedidoTotal>
+            </PedidoInfo>
+          </Pedido>
+        ))}
+      </Lista>
       <BtnVolta>
         <BtnVoltar onClick={voltarLoja}>Volte a loja</BtnVoltar>
       </BtnVolta>
@@ -54,4 +81,37 @@ const BtnVolta = styled.div`
   gap: 10px;
   flex-wrap: wrap;
 `;
+
+const Lista = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+`;
+
+const Pedido = styled.li`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fafafa;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+`;
+
+const PedidoInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const PedidoStatus = styled.span`
+  font-weight: 600;
+  color: #333;
+`;
+
+const PedidoTotal = styled.span`
+  color: #27ae60;
+  font-weight: bold;
+`;
+
 export default Usuario;
